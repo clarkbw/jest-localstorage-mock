@@ -1,0 +1,36 @@
+{
+  "name": "jest-localstorage-mock",
+  "version": "1.0.0",
+  "description": "Mock localstorage in your Jest tests",
+  "main": "dist/setup.js",
+  "module": "src/setup.js",
+  "author": "Bryan Clark <clarkbw@gmail.com> (https://twitter.com/clarkbw)",
+  "license": "ISC",
+  "scripts": {
+    "test": "jest",
+    "build": "rollup -c",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" rollup.config.js",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+  },
+  "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-prettier": "^1.7.0",
+    "eslint-plugin-prettier": "^2.0.1",
+    "jest": "^19.0.2",
+    "prettier": "^1.3.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "jest": {
+     "bail": true,
+     "coverageDirectory": "./coverage/",
+     "collectCoverage": true,
+     "setupFiles": [
+       "./__setups__/localstorage.js"
+     ]
+ }
+}
