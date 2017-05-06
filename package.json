@@ -1,6 +1,6 @@
 {
   "name": "jest-localstorage-mock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mock localstorage in your Jest tests",
   "main": "dist/setup.js",
   "module": "src/setup.js",
@@ -26,11 +26,11 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "jest": {
-     "bail": true,
-     "coverageDirectory": "./coverage/",
-     "collectCoverage": true,
-     "setupFiles": [
-       "./__setups__/localstorage.js"
-     ]
- }
+    "bail": true,
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "setupFiles": [
+      "./__setups__/localstorage.js"
+    ]
+  }
 }
