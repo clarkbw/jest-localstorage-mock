@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "rollup -c",
     "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" rollup.config.js",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "version": "yarn run build"
   },
   "devDependencies": {
     "babel-jest": "^20.0.0",
