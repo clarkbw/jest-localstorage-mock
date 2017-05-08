@@ -1,55 +1,74 @@
+// https://html.spec.whatwg.org/multipage/webstorage.html#storage
 beforeEach(() => {
-  localStorage.clear();
+  localStorage.store = {};
 });
 
-test('localstorage clear', () => {
+// clear
+// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-clear
+test('localstorage.clear', () => {
   const KEY = 'foo', VALUE = 'bar';
   localStorage.setItem(KEY, VALUE);
-  expect(localStorage.getItem(KEY)).toBe(VALUE);
+  expect(localStorage.store[KEY]).toBe(VALUE);
+  expect(Object.keys(localStorage.store).length).toBe(1);
   localStorage.clear();
-  expect(localStorage.getItem(KEY)).toBeNull();
-});
-
-test('localstorage set and get', () => {
-  const KEY = 'foo', VALUE = 'bar';
+  expect(Object.keys(localStorage.store).length).toBe(0);
+  expect(localStorage.store[KEY]).toBeUndefined();
   localStorage.setItem(KEY, VALUE);
-  expect(localStorage.getItem(KEY)).toBe(VALUE);
+  localStorage.clear();
+  expect(Object.keys(localStorage.store).length).toBe(0);
+  expect(localStorage.store[KEY]).toBeUndefined();
 });
 
-test('localstorage set, overwrite, and get', () => {
+// setItem
+// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-setitem
+test('localstorage.setItem', () => {
+  const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
+  localStorage.setItem(KEY, VALUE1);
+  expect(localStorage.store[KEY]).toBe(VALUE1);
+  localStorage.setItem(KEY, VALUE2);
+  expect(localStorage.store[KEY]).toBe(VALUE2);
+});
+
+// getItem
+// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-getitem
+test('localstorage.getItem', () => {
   const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
   localStorage.setItem(KEY, VALUE1);
   expect(localStorage.getItem(KEY)).toBe(VALUE1);
   localStorage.setItem(KEY, VALUE2);
   expect(localStorage.getItem(KEY)).toBe(VALUE2);
+  expect(localStorage.getItem('does not exist')).toBeNull();
 });
 
-test('localstorage set, overwrite, and get', () => {
+// removeItem
+// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-removeitem
+test('localstorage.removeItem', () => {
   const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
   localStorage.setItem(KEY, VALUE1);
   expect(localStorage.getItem(KEY)).toBe(VALUE1);
-  localStorage.setItem(KEY, VALUE2);
-  expect(localStorage.getItem(KEY)).toBe(VALUE2);
-});
-
-test('localstorage set and remove', () => {
-  const KEY = 'foo', VALUE = 'bar';
-  localStorage.setItem(KEY, VALUE);
-  expect(localStorage.getItem(KEY)).toBe(VALUE);
   localStorage.removeItem(KEY);
   expect(localStorage.getItem(KEY)).toBeNull();
+  localStorage.setItem(KEY, VALUE2);
+  localStorage.removeItem(KEY);
+  expect(localStorage.getItem(KEY)).toBeNull();
+  localStorage.removeItem('not a key'); // does not throw
 });
 
+// length
+// ttps://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-length
 test('localstorage set and remove', () => {
   const KEY1 = 'foo', VALUE = 'bar', KEY2 = 'baz';
+  expect(localStorage.length).toBe(0);
   localStorage.setItem(KEY1, VALUE);
-  expect(localStorage.getItem(KEY1)).toBe(VALUE);
   expect(localStorage.length).toBe(1);
   localStorage.setItem(KEY2, VALUE);
-  expect(localStorage.getItem(KEY2)).toBe(VALUE);
   expect(localStorage.length).toBe(2);
+  localStorage.clear();
+  expect(localStorage.length).toBe(0);
 });
 
+// key
+// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-key
 test('localstorage.key', () => {
   const KEY = 'foo', VALUE = 'bar';
   localStorage.setItem(KEY, VALUE);
