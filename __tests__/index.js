@@ -49,3 +49,12 @@ test('localstorage set and remove', () => {
   expect(localStorage.getItem(KEY2)).toBe(VALUE);
   expect(localStorage.length).toBe(2);
 });
+
+test('localstorage.key', () => {
+  const KEY = 'foo', VALUE = 'bar';
+  localStorage.setItem(KEY, VALUE);
+  expect(localStorage.getItem(KEY)).toBe(VALUE);
+  expect(localStorage.key(0)).toBe(KEY);
+  expect(localStorage.length).toBe(1);
+  expect(localStorage.key(1)).toBeNull();
+});

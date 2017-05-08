@@ -54,6 +54,12 @@ var LocalStorage = function () {
       delete this.store[key];
     }
   }, {
+    key: 'key',
+    value: function key(index) {
+      var keys = Object.keys(this.store);
+      return keys[index] || null;
+    }
+  }, {
     key: 'length',
     get: function get$$1() {
       return Object.keys(this.store).length;
