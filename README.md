@@ -1,7 +1,5 @@
-[![npm](https://img.shields.io/npm/v/jest-localstorage-mock.svg)](https://www.npmjs.com/package/jest-localstorage-mock) | [![npm](https://img.shields.io/npm/l/jest-localstorage-mock.svg)](https://github.com/clarkbw/jest-localstorage-mock/blob/master/LICENSE) | [![Twitter](https://img.shields.io/twitter/url/https/github.com/clarkbw/jest-localstorage-mock.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+[![npm](https://img.shields.io/npm/v/jest-localstorage-mock.svg)](https://www.npmjs.com/package/jest-localstorage-mock) | [![npm](https://img.shields.io/npm/l/jest-localstorage-mock.svg)](https://github.com/clarkbw/jest-localstorage-mock/blob/master/LICENSE) | [![Codecov](https://img.shields.io/codecov/c/github/clarkbw/jest-localstorage-mock.svg)](https://codecov.io/gh/clarkbw/jest-localstorage-mock) | [![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/jest-localstorage-mock.svg)](https://greenkeeper.io/) |  [![Twitter](https://img.shields.io/twitter/url/https/github.com/clarkbw/jest-localstorage-mock.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 ---|---
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/jest-localstorage-mock.svg)](https://greenkeeper.io/)
 
 ## Install
 
