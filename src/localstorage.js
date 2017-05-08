@@ -19,6 +19,11 @@ export class LocalStorage {
     delete this.store[key];
   }
 
+  key(index) {
+    const keys = Object.keys(this.store);
+    return keys[index] || null;
+  }
+
   get length() {
     return Object.keys(this.store).length;
   }
