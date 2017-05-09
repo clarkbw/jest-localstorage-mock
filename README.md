@@ -34,7 +34,7 @@ Alternatively you can create a new setup file and require this module.
 
 `__setups__/localstorage.js`
 ```js
-global.chrome = require('jest-localstorage-mock');
+require('jest-localstorage-mock');
 ```
 
 And add that file to your `setupFiles`:
