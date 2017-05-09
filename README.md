@@ -51,7 +51,7 @@ And add that file to your `setupFiles`:
 
 In `src/setupTests.js` you can add this at the beginning:
 
-```
+```js
 require("jest-localstorage-mock");
 ```
 
