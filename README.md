@@ -47,6 +47,14 @@ And add that file to your `setupFiles`:
 }
 ```
 
+### Use with create-react-app
+
+In `src/setupTests.js` you can add this at the beginning:
+
+```
+require("jest-localstorage-mock");
+```
+
 ## Usage
 
 With this module setup in Jest you can run your web tests that rely on `localstorage` without fail.
