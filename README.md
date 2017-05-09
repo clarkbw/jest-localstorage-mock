@@ -49,7 +49,7 @@ And add that file to your `setupFiles`:
 
 ### Use with create-react-app
 
-In `src/setupTests.js` you can add this at the beginning:
+In `src/setupTests.js` you can [replace the recommended mock](https://github.com/facebookincubator/create-react-app/tree/master/packages/react-scripts/template#srcsetuptestsjs) and instead add this at the beginning:
 
 ```js
 require("jest-localstorage-mock");
