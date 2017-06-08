@@ -27,4 +27,8 @@ export class LocalStorage {
   get length() {
     return Object.keys(this.store).length;
   }
+
+  toString() {
+    return '[object Storage]';
+  }
 }
