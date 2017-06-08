@@ -77,3 +77,7 @@ test('localstorage.key', () => {
   expect(localStorage.length).toBe(1);
   expect(localStorage.key(1)).toBeNull();
 });
+
+test('localstorage.toString', () => {
+  expect(localStorage.toString()).toEqual('[object Storage]');
+});
