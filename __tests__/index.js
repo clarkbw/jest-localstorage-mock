@@ -27,6 +27,8 @@ test('localstorage.setItem', () => {
   expect(localStorage.store[KEY]).toBe(VALUE1);
   localStorage.setItem(KEY, VALUE2);
   expect(localStorage.store[KEY]).toBe(VALUE2);
+  localStorage.setItem(KEY);
+  expect(localStorage.store[KEY]).toEqual('');
 });
 
 // getItem
