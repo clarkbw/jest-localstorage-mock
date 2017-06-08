@@ -1,5 +1,5 @@
 
-Use this module with [Jest](https://facebook.github.io/jest/) to run web tests that rely on `localstorage` without fail.
+Use this module with [Jest](https://facebook.github.io/jest/) to run web tests that rely on `localstorage` where you want a working localStorage like API and mocked localStorage functions.
 
 This module has no runtime dependencies so your project won't pull in additional module dependencies by using this.
 
@@ -73,6 +73,48 @@ For a [create-react-app](https://github.com/facebookincubator/create-react-app) 
 require("jest-localstorage-mock");
 ```
 
+## In tests
+
+By including this in your Jest setup you'll allow tests that expect a `localStorage` object to continue to run.  The module can also allow you to use the mocks provided to check that your localStorage is being used as expected.
+
+The `__STORE__` attribute of `localStorage.__STORE__` is made available for you to directly access the localStorage object if needed.
+
+### Test Examples
+
+Check that your `localStorage` calls were made when they were supposed to.
+
+```js
+test('should save to localStorage', () => {
+  const KEY = 'foo', VALUE = 'bar';
+  dispatch(action.update(KEY, VALUE));
+  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
+  expect(localStorage.__STORE__[KEY]).toBe(VALUE);
+  expect(Object.keys(localStorage.__STORE__).length).toBe(1);
+});
+```
+
+Check that your storage is empty.
+
+```js
+test('should have cleared the localStorage', () => {
+  dispatch(action.reset());
+  expect(localStorage.clear).toHaveBeenCalledTimes(1);
+  expect(localStorage.__STORE__).toEqual({}); // check store values
+  expect(localStorage.length).toBe(0); // or check length
+});
+```
+
+Check that localStorage calls were not made when they shouldn't have been.
+
+```js
+test('should not have saved to localStorage', () => {
+  const KEY = 'foo', VALUE = 'bar';
+  dispatch(action.notIdempotent(KEY, VALUE));
+  expect(localStorage.setItem).not.toHaveBeenLastCalledWith(KEY, VALUE);
+  expect(Object.keys(localStorage.__STORE__).length).toBe(0);
+});
+```
+
 ## Development
 
 ```
@@ -95,5 +137,7 @@ When publishing a new build, run the following:
 ```
 yarn run prettier
 yarn run build
-yarn publish
+npm version `${version}`
+npm publish
+git push --tags
 ```

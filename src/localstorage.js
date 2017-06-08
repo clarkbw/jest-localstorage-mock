@@ -11,7 +11,7 @@ export class LocalStorage {
     return this.store[key] || null;
   }
 
-  setItem(key, value = '') {
+  setItem(key, value) {
     this.store[key] = value;
   }
 
