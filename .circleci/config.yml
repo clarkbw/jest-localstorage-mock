@@ -22,6 +22,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # setup greenkeeper-lockfile
+      - run: sudo yarn global add greenkeeper-lockfile@1
+
       - run: yarn install
 
       - save_cache:
@@ -29,8 +32,12 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: greenkeeper-lockfile-update
+
       # run tests!
       - run: yarn test
+
+      - run: greenkeeper-lockfile-upload
 
       # upload coverage
       - run: bash <(curl -s https://codecov.io/bash)
