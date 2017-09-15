@@ -1,117 +1,122 @@
-// https://html.spec.whatwg.org/multipage/webstorage.html#storage
-beforeEach(() => {
-  localStorage.__STORE__ = {};
-  jest.clearAllMocks();
-});
 
-// clear
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-clear
-test('localstorage.clear', () => {
-  const KEY = 'foo', VALUE = 'bar';
-  localStorage.setItem(KEY, VALUE);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(1);
-  localStorage.clear();
-  expect(localStorage.clear).toHaveBeenCalledTimes(1);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(0);
-  expect(localStorage.__STORE__[KEY]).toBeUndefined();
-  localStorage.setItem(KEY, VALUE);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-  localStorage.clear();
-  expect(localStorage.clear).toHaveBeenCalledTimes(2);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(0);
-  expect(localStorage.__STORE__[KEY]).toBeUndefined();
-});
+describe('storage', () => [localStorage,sessionStorage].map((storage) => {
 
-// setItem
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-setitem
-test('localstorage.setItem', () => {
-  const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
-  localStorage.setItem(KEY, VALUE1);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE1);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE1);
-  localStorage.setItem(KEY, VALUE2);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE2);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE2);
-});
+  // https://html.spec.whatwg.org/multipage/webstorage.html#storage
+  beforeEach(() => {
+    storage.__STORE__ = {};
+    jest.clearAllMocks();
+  });
 
-// getItem
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-getitem
-test('localstorage.getItem', () => {
-  const KEY = 'foo',
-    VALUE1 = 'bar',
-    VALUE2 = 'baz',
-    DOES_NOT_EXIST = 'does not exist';
+  // clear
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-clear
+  test('storage.clear', () => {
+    const KEY = 'foo', VALUE = 'bar';
+    storage.setItem(KEY, VALUE);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
+    expect(storage.__STORE__[KEY]).toBe(VALUE);
+    expect(Object.keys(storage.__STORE__).length).toBe(1);
+    storage.clear();
+    expect(storage.clear).toHaveBeenCalledTimes(1);
+    expect(Object.keys(storage.__STORE__).length).toBe(0);
+    expect(storage.__STORE__[KEY]).toBeUndefined();
+    storage.setItem(KEY, VALUE);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
+    storage.clear();
+    expect(storage.clear).toHaveBeenCalledTimes(2);
+    expect(Object.keys(storage.__STORE__).length).toBe(0);
+    expect(storage.__STORE__[KEY]).toBeUndefined();
+  });
 
-  localStorage.setItem(KEY, VALUE1);
-  expect(localStorage.getItem(KEY)).toBe(VALUE1);
-  expect(localStorage.getItem).toHaveBeenLastCalledWith(KEY);
+  // setItem
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-setitem
+  test('storage.setItem', () => {
+    const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
+    storage.setItem(KEY, VALUE1);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE1);
+    expect(storage.__STORE__[KEY]).toBe(VALUE1);
+    storage.setItem(KEY, VALUE2);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE2);
+    expect(storage.__STORE__[KEY]).toBe(VALUE2);
+  });
 
-  localStorage.setItem(KEY, VALUE2);
-  expect(localStorage.getItem(KEY)).toBe(VALUE2);
-  expect(localStorage.getItem).toHaveBeenLastCalledWith(KEY);
+  // getItem
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-getitem
+  test('storage.getItem', () => {
+    const KEY = 'foo',
+      VALUE1 = 'bar',
+      VALUE2 = 'baz',
+      DOES_NOT_EXIST = 'does not exist';
 
-  expect(localStorage.getItem(DOES_NOT_EXIST)).toBeNull();
-  expect(localStorage.getItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
-});
+    storage.setItem(KEY, VALUE1);
+    expect(storage.getItem(KEY)).toBe(VALUE1);
+    expect(storage.getItem).toHaveBeenLastCalledWith(KEY);
 
-// removeItem
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-removeitem
-test('localstorage.removeItem', () => {
-  const KEY = 'foo',
-    VALUE1 = 'bar',
-    VALUE2 = 'baz',
-    DOES_NOT_EXIST = 'does not exist';
+    storage.setItem(KEY, VALUE2);
+    expect(storage.getItem(KEY)).toBe(VALUE2);
+    expect(storage.getItem).toHaveBeenLastCalledWith(KEY);
 
-  localStorage.setItem(KEY, VALUE1);
-  expect(localStorage.getItem(KEY)).toBe(VALUE1);
-  localStorage.removeItem(KEY);
-  expect(localStorage.removeItem).toHaveBeenLastCalledWith(KEY);
+    expect(storage.getItem(DOES_NOT_EXIST)).toBeNull();
+    expect(storage.getItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
+  });
 
-  expect(localStorage.getItem(KEY)).toBeNull();
-  localStorage.setItem(KEY, VALUE2);
-  localStorage.removeItem(KEY);
-  expect(localStorage.removeItem).toHaveBeenLastCalledWith(KEY);
+  // removeItem
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-removeitem
+  test('storage.removeItem', () => {
+    const KEY = 'foo',
+      VALUE1 = 'bar',
+      VALUE2 = 'baz',
+      DOES_NOT_EXIST = 'does not exist';
 
-  expect(localStorage.getItem(KEY)).toBeNull();
-  localStorage.removeItem(DOES_NOT_EXIST); // does not throw
-  expect(localStorage.removeItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
-});
+    storage.setItem(KEY, VALUE1);
+    expect(storage.getItem(KEY)).toBe(VALUE1);
+    storage.removeItem(KEY);
+    expect(storage.removeItem).toHaveBeenLastCalledWith(KEY);
 
-// length
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-length
-// length is not mocked
-test('localstorage set and remove', () => {
-  const KEY1 = 'foo', VALUE = 'bar', KEY2 = 'baz';
-  expect(localStorage.length).toBe(0);
-  localStorage.setItem(KEY1, VALUE);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY1, VALUE);
-  expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-  expect(localStorage.length).toBe(1);
-  localStorage.setItem(KEY2, VALUE);
-  expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY2, VALUE);
-  expect(localStorage.setItem).toHaveBeenCalledTimes(2);
-  expect(localStorage.length).toBe(2);
-  localStorage.clear();
-  expect(localStorage.clear).toHaveBeenCalledTimes(1);
-  expect(localStorage.length).toBe(0);
-});
+    expect(storage.getItem(KEY)).toBeNull();
+    storage.setItem(KEY, VALUE2);
+    storage.removeItem(KEY);
+    expect(storage.removeItem).toHaveBeenLastCalledWith(KEY);
 
-// key
-// https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-key
-test('localstorage.key', () => {
-  const KEY = 'foo', VALUE = 'bar';
-  localStorage.setItem(KEY, VALUE);
-  expect(localStorage.getItem(KEY)).toBe(VALUE);
-  expect(localStorage.key(0)).toBe(KEY);
-  expect(localStorage.key).toHaveBeenLastCalledWith(0);
-  expect(localStorage.length).toBe(1);
-  expect(localStorage.key(1)).toBeNull();
-  expect(localStorage.key).toHaveBeenLastCalledWith(1);
-});
+    expect(storage.getItem(KEY)).toBeNull();
+    storage.removeItem(DOES_NOT_EXIST); // does not throw
+    expect(storage.removeItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
+  });
 
-test('localstorage.toString', () => {
-  expect(localStorage.toString()).toEqual('[object Storage]');
-  expect(localStorage.toString).toHaveBeenCalledTimes(1);
-});
+  // length
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-length
+  // length is not mocked
+  test('storage set and remove', () => {
+    const KEY1 = 'foo', VALUE = 'bar', KEY2 = 'baz';
+    expect(storage.length).toBe(0);
+    storage.setItem(KEY1, VALUE);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY1, VALUE);
+    expect(storage.setItem).toHaveBeenCalledTimes(1);
+    expect(storage.length).toBe(1);
+    storage.setItem(KEY2, VALUE);
+    expect(storage.setItem).toHaveBeenLastCalledWith(KEY2, VALUE);
+    expect(storage.setItem).toHaveBeenCalledTimes(2);
+    expect(storage.length).toBe(2);
+    storage.clear();
+    expect(storage.clear).toHaveBeenCalledTimes(1);
+    expect(storage.length).toBe(0);
+  });
+
+  // key
+  // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-key
+  test('storage.key', () => {
+    const KEY = 'foo', VALUE = 'bar';
+    storage.setItem(KEY, VALUE);
+    expect(storage.getItem(KEY)).toBe(VALUE);
+    expect(storage.key(0)).toBe(KEY);
+    expect(storage.key).toHaveBeenLastCalledWith(0);
+    expect(storage.length).toBe(1);
+    expect(storage.key(1)).toBeNull();
+    expect(storage.key).toHaveBeenLastCalledWith(1);
+  });
+
+  test('storage.toString', () => {
+    expect(storage.toString()).toEqual('[object Storage]');
+    expect(storage.toString).toHaveBeenCalledTimes(1);
+  });
+
+}));
