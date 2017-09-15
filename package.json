@@ -5,6 +5,10 @@
   "main": "dist/setup.js",
   "module": "src/setup.js",
   "author": "Bryan Clark <clarkbw@gmail.com> (https://twitter.com/clarkbw)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clarkbw/jest-localstorage-mock"
+  },
   "license": "ISC",
   "scripts": {
     "test": "jest",
