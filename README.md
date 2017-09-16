@@ -1,5 +1,5 @@
 
-Use this module with [Jest](https://facebook.github.io/jest/) to run web tests that rely on `localstorage` where you want a working localStorage like API and mocked localStorage functions.
+Use this module with [Jest](https://facebook.github.io/jest/) to run web tests that rely on `localstorage` and / or `sessionStorage` where you want a working localStorage API with mocked functions.
 
 This module has no runtime dependencies so your project won't pull in additional module dependencies by using this.
 
@@ -75,9 +75,9 @@ require("jest-localstorage-mock");
 
 ## In tests
 
-By including this in your Jest setup you'll allow tests that expect a `localStorage` object to continue to run.  The module can also allow you to use the mocks provided to check that your localStorage is being used as expected.
+By including this in your Jest setup you'll allow tests that expect a `localStorage` and `sessionStorage` object to continue to run.  The module can also allow you to use the mocks provided to check that your localStorage is being used as expected.
 
-The `__STORE__` attribute of `localStorage.__STORE__` is made available for you to directly access the localStorage object if needed.
+The `__STORE__` attribute of `localStorage.__STORE__` or `sessionStorage.__STORE__` is made available for you to directly access the storage object if needed.
 
 ### Test Examples
 
@@ -93,18 +93,18 @@ test('should save to localStorage', () => {
 });
 ```
 
-Check that your storage is empty.
+Check that your `sessionStorage` is empty, examples work with either `localStorage` or `sessionStorage`.
 
 ```js
-test('should have cleared the localStorage', () => {
+test('should have cleared the sessionStorage', () => {
   dispatch(action.reset());
-  expect(localStorage.clear).toHaveBeenCalledTimes(1);
-  expect(localStorage.__STORE__).toEqual({}); // check store values
-  expect(localStorage.length).toBe(0); // or check length
+  expect(sessionStorage.clear).toHaveBeenCalledTimes(1);
+  expect(sessionStorage.__STORE__).toEqual({}); // check store values
+  expect(sessionStorage.length).toBe(0); // or check length
 });
 ```
 
-Check that localStorage calls were not made when they shouldn't have been.
+Check that `localStorage` calls were not made when they shouldn't have been.
 
 ```js
 test('should not have saved to localStorage', () => {
