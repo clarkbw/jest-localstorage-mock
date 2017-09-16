@@ -9,7 +9,8 @@ describe('storage', () =>
     // clear
     // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-clear
     test('storage.clear', () => {
-      const KEY = 'foo', VALUE = 'bar';
+      const KEY = 'foo',
+        VALUE = 'bar';
       storage.setItem(KEY, VALUE);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
       expect(storage.__STORE__[KEY]).toBe(VALUE);
@@ -29,7 +30,9 @@ describe('storage', () =>
     // setItem
     // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-setitem
     test('storage.setItem', () => {
-      const KEY = 'foo', VALUE1 = 'bar', VALUE2 = 'baz';
+      const KEY = 'foo',
+        VALUE1 = 'bar',
+        VALUE2 = 'baz';
       storage.setItem(KEY, VALUE1);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE1);
       expect(storage.__STORE__[KEY]).toBe(VALUE1);
@@ -85,7 +88,9 @@ describe('storage', () =>
     // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-length
     // length is not mocked
     test('storage set and remove', () => {
-      const KEY1 = 'foo', VALUE = 'bar', KEY2 = 'baz';
+      const KEY1 = 'foo',
+        VALUE = 'bar',
+        KEY2 = 'baz';
       expect(storage.length).toBe(0);
       storage.setItem(KEY1, VALUE);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY1, VALUE);
@@ -103,7 +108,8 @@ describe('storage', () =>
     // key
     // https://html.spec.whatwg.org/multipage/webstorage.html#dom-storage-key
     test('storage.key', () => {
-      const KEY = 'foo', VALUE = 'bar';
+      const KEY = 'foo',
+        VALUE = 'bar';
       storage.setItem(KEY, VALUE);
       expect(storage.getItem(KEY)).toBe(VALUE);
       expect(storage.key(0)).toBe(KEY);
