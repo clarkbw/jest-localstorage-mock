@@ -15,6 +15,6 @@ export default {
   output: {
     file: 'dist/setup.js',
     format: 'cjs',
-    sourcemap: true
-  }
+    sourcemap: true,
+  },
 };
