@@ -160,8 +160,11 @@ var LocalStorage = function () {
     }
   }, {
     key: 'setItem',
-    value: function setItem(key, value) {
-      this.store[key] = value;
+    value: function setItem(key) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+      // not mentioned in the spec, but we must always coerce to a string
+      this.store[key] = value + '';
     }
   }, {
     key: 'removeItem',
