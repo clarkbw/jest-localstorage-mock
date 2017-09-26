@@ -11,8 +11,9 @@ export class LocalStorage {
     return this.store[key] || null;
   }
 
-  setItem(key, value) {
-    this.store[key] = value;
+  setItem(key, value = '') {
+    // not mentioned in the spec, but we must always coerce to a string
+    this.store[key] = value + '';
   }
 
   removeItem(key) {

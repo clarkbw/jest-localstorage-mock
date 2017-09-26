@@ -32,13 +32,22 @@ describe('storage', () =>
     test('storage.setItem', () => {
       const KEY = 'foo',
         VALUE1 = 'bar',
-        VALUE2 = 'baz';
+        VALUE2 = 'baz',
+        VALUE3 = 42;
       storage.setItem(KEY, VALUE1);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE1);
       expect(storage.__STORE__[KEY]).toBe(VALUE1);
       storage.setItem(KEY, VALUE2);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE2);
       expect(storage.__STORE__[KEY]).toBe(VALUE2);
+      storage.setItem(KEY, VALUE3);
+      expect(storage.__STORE__[KEY]).toBe(VALUE3.toString());
+      storage.setItem(KEY, null);
+      expect(storage.__STORE__[KEY]).toBe('null');
+      storage.setItem(KEY, undefined);
+      expect(storage.__STORE__[KEY]).toBe('');
+      storage.setItem(KEY, {});
+      expect(storage.__STORE__[KEY]).toBe('[object Object]');
     });
 
     // getItem
