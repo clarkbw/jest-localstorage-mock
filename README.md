@@ -7,7 +7,7 @@ This module has no runtime dependencies so your project won't pull in additional
 
 ## Install
 
-This should only be required as a dev dependency when your tests are running.
+This should only be installed as a development dependency (`devDependencies`) as it is only designed for testing.
 
 yarn:
 
@@ -23,9 +23,11 @@ npm i --save-dev jest-localstorage-mock
 
 ## Setup
 
+The simplest setup is to use the module system, you may also choose to create a setup file.
+
 ### Module
 
-In your `package.json` under the `jest` section add the module name to the `setupFiles` array. This is by far the simplest method for using this.
+In your `package.json` under the `jest` [configuration section](https://facebook.github.io/jest/docs/en/configuration.html#content) create a `setupFiles` array and add `jest-localstorage-mock` to the array.
 
 ```json
 "jest": {
@@ -35,7 +37,7 @@ In your `package.json` under the `jest` section add the module name to the `setu
 }
 ```
 
-You can also append this to the array if you have other setup files.
+If you already have a `setupFiles` attribute you can also append `jest-localstorage-mock` to the array.
 
 ```json
 "jest": {
@@ -115,29 +117,4 @@ test('should not have saved to localStorage', () => {
 });
 ```
 
-## Development
-
-```
-yarn install
-yarn test
-```
-
-## Pull Request
-
-Before every PR run the following:
-
-```
-yarn run prettier
-```
-
-## Publish
-
-When publishing a new build, run the following:
-
-```
-yarn run prettier
-yarn run build
-npm version `${version}`
-npm publish
-git push --tags
-```
+See the [contributing guide](./CONTRIBUTING.md) for details on how you can contribute.
