@@ -1,15 +1,52 @@
 {
   "name": "jest-localstorage-mock",
   "version": "2.0.1",
-  "description": "Mock localstorage in your Jest tests",
+  "description": "Mock localstorage and sessionstorage in your Jest tests, so you don't have to.",
   "main": "dist/setup.js",
   "module": "src/setup.js",
   "author": "Bryan Clark <clarkbw@gmail.com> (https://twitter.com/clarkbw)",
+  "maintainers": [
+    {
+      "name": "Bryan Clark",
+      "email": "clarkbw@gmail.com",
+      "web": "https://twitter.com/clarkbw"
+    }
+  ],
+  "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/clarkbw/jest-localstorage-mock"
+    "url": "https://github.com/clarkbw/jest-localstorage-mock.git"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/clarkbw/jest-localstorage-mock.git"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/clarkbw/jest-localstorage-mock/issues"
+  },
+  "homepage": "https://github.com/clarkbw/jest-localstorage-mock",
   "license": "ISC",
+  "licenses": [
+    {
+      "type": "ISC"
+    }
+  ],
+  "keywords": [
+    "jest",
+    "test",
+    "mock",
+    "localstorage",
+    "sessionstorage",
+    "storage",
+    "node",
+    "browser"
+  ],
+  "directories": {
+    "lib": "./src",
+    "test": "./__tests__"
+  },
   "scripts": {
     "test": "jest",
     "build": "rollup -c",
@@ -17,7 +54,9 @@
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "version": "yarn run build"
   },
+  "dependencies": {},
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-jest": "^21.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.4.0",
@@ -30,8 +69,12 @@
     "rollup-plugin-babel": "^3.0.0",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
+  "engines": {
+    "node": "*"
+  },
   "jest": {
     "bail": true,
+    "verbose": true,
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "setupFiles": [
