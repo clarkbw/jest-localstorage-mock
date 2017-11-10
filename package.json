@@ -1,8 +1,7 @@
 {
   "name": "jest-localstorage-mock",
-  "version": "2.0.1",
-  "description":
-    "Auto mock all localstorage and sessionstorage APIs for your Jest tests",
+  "version": "2.1.0",
+  "description": "Auto mock all localstorage and sessionstorage APIs for your Jest tests",
   "main": "dist/setup.js",
   "module": "src/setup.js",
   "author": "Bryan Clark <clarkbw@gmail.com> (https://twitter.com/clarkbw)",
@@ -51,8 +50,7 @@
   "scripts": {
     "test": "jest",
     "build": "rollup -c",
-    "prettier":
-      "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" README.md CONTRIBUTING.md *.json rollup.config.js",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" README.md CONTRIBUTING.md *.json rollup.config.js",
     "version": "yarn run build"
   },
   "dependencies": {},
@@ -77,6 +75,8 @@
     "bail": true,
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
-    "setupFiles": ["./__setups__/localstorage.js"]
+    "setupFiles": [
+      "./__setups__/localstorage.js"
+    ]
   }
 }
