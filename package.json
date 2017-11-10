@@ -52,11 +52,12 @@
     "test": "jest",
     "build": "rollup -c",
     "prettier":
-      "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" rollup.config.js",
+      "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" README.md CONTRIBUTING.md *.json rollup.config.js",
     "version": "yarn run build"
   },
   "dependencies": {},
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
@@ -70,7 +71,7 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "engines": {
-    "node": "*"
+    "node": ">=6.11.3"
   },
   "jest": {
     "bail": true,
