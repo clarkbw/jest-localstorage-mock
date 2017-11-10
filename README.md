@@ -54,6 +54,8 @@ Alternatively you can create a new setup file which then requires this module or
 
 `__setups__/localstorage.js`
 ```js
+import 'jest-localstorage-mock';
+// or 
 require('jest-localstorage-mock');
 ```
 
