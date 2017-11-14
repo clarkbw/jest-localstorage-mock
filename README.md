@@ -152,10 +152,10 @@ beforeEach(() => {
   localStorage.clear();
   // or directly reset the storage
   localStorage.__STORE__ = {};
-  // you may also reset all mocks, which could impact your other mocks
+  // you could also reset all mocks, but this could impact your other mocks
   jest.resetAllMocks();
   // or individually reset a mock used
-  localStorage.setItem.mockReset();
+  localStorage.setItem.mockClear();
 });
 
 test('should not impact the next test', () => {
