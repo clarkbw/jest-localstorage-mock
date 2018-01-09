@@ -2,7 +2,7 @@ describe('storage', () =>
   [localStorage, sessionStorage].map(storage => {
     // https://html.spec.whatwg.org/multipage/webstorage.html#storage
     beforeEach(() => {
-      storage.__STORE__ = {};
+      storage.clear();
       jest.clearAllMocks();
     });
 
