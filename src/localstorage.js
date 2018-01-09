@@ -1,35 +1,52 @@
-export class LocalStorage {
-  constructor() {
-    this.store = {};
-  }
+export class LocalStorage  {
+    constructor() {
+        Object.defineProperty(this, "getItem", {
+            enumerable: false,
+            value: jest.fn((key) => {return this[key] || null })
 
-  clear() {
-    this.store = {};
-  }
+        });
+        Object.defineProperty(this, "setItem", {
+            enumerable: false,
+            value: jest.fn((key, val = '') => {
+                this[key] = val + '';
+            })
+        });
+        Object.defineProperty(this, "removeItem", {
+            enumerable: false,
+            value: jest.fn((key) => {
+                delete this[key];
+            })
+        });
+        Object.defineProperty(this, "clear", {
+            enumerable: false,
+            value: jest.fn(() => {
+                Object.keys(this).map(key => delete this[key]);
 
-  getItem(key) {
-    return this.store[key] || null;
-  }
+            })
+        });
+        Object.defineProperty(this, "toString", {
+            enumerable: false,
+            value: jest.fn(() => {
+                return "[object Storage]"
 
-  setItem(key, value = '') {
-    // not mentioned in the spec, but we must always coerce to a string
-    this.store[key] = value + '';
-  }
+            })
+        });
+        Object.defineProperty(this, "key", {
+            enumerable: false,
+            value: jest.fn((idx) => {
+                return Object.keys(this)[idx] || null
+            })
+        });
 
-  removeItem(key) {
-    delete this.store[key];
-  }
+    } // end constructor
 
-  key(index) {
-    const keys = Object.keys(this.store);
-    return keys[index] || null;
-  }
+    get length() {
+        return Object.keys(this).length
+    }
 
-  get length() {
-    return Object.keys(this.store).length;
-  }
+    get __STORE__() {
+        return this
+    }
 
-  toString() {
-    return '[object Storage]';
-  }
 }
+
