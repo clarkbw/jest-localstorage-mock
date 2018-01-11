@@ -1,9 +1,4 @@
 import { LocalStorage } from './localstorage';
 
-const local = new LocalStorage();
-const session = new LocalStorage();
-
-global.localStorage = local;
-global.sessionStorage = session;
-
-
+global.localStorage = new LocalStorage(jest);
+global.sessionStorage = new LocalStorage(jest);
