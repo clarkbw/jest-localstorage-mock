@@ -1,6 +1,6 @@
 {
   "name": "jest-localstorage-mock",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Auto mock all localstorage and sessionstorage APIs for your Jest tests",
   "main": "dist/setup.js",
   "module": "src/setup.js",
