@@ -56,7 +56,8 @@ describe('storage', () =>
       const KEY = 'foo',
         VALUE1 = 'bar',
         VALUE2 = 'baz',
-        DOES_NOT_EXIST = 'does not exist';
+        DOES_NOT_EXIST = 'does not exist',
+        LOCAL_STORAGE_PROPERTY_NAME = 'key';
 
       storage.setItem(KEY, VALUE1);
       expect(storage.getItem(KEY)).toBe(VALUE1);
@@ -68,6 +69,14 @@ describe('storage', () =>
 
       expect(storage.getItem(DOES_NOT_EXIST)).toBeNull();
       expect(storage.getItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
+
+      expect(() =>
+        storage.setItem(LOCAL_STORAGE_PROPERTY_NAME, VALUE1)
+      ).not.toThrow();
+      expect(storage.getItem(LOCAL_STORAGE_PROPERTY_NAME)).toBe(VALUE1);
+      expect(storage.getItem).toHaveBeenLastCalledWith(
+        LOCAL_STORAGE_PROPERTY_NAME
+      );
     });
 
     // removeItem
