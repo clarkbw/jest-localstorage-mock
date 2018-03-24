@@ -132,4 +132,30 @@ describe('storage', () =>
       expect(storage.toString()).toEqual('[object Storage]');
       expect(storage.toString).toHaveBeenCalledTimes(1);
     });
+
+    test('storage setItem throws', () => {
+      storage.setItem.mockImplementation(() => {
+        throw new Error('You shall not pass!');
+      });
+      expect(() => {
+        storage.setItem('someItem', 'testValue');
+      }).toThrow('You shall not pass!');
+    });
+
+    test('storage setItem throws and then resets correctly', () => {
+      storage.setItem.mockImplementation(() => {
+        throw new Error('You shall not pass!');
+      });
+      expect(() => {
+        storage.setItem('someItem', 'testValue');
+      }).toThrow('You shall not pass!');
+      storage.setItem.mockReset();
+
+      expect(() => {
+        storage.setItem('someItem', 'testValue');
+      }).not.toThrow();
+
+      expect(storage.length).toBe(1);
+      expect(storage.getItem('someItem')).toEqual('testValue');
+    });
   }));
