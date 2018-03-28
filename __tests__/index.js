@@ -141,4 +141,16 @@ describe('storage', () =>
       expect(storage.toString()).toEqual('[object Storage]');
       expect(storage.toString).toHaveBeenCalledTimes(1);
     });
+
+    test('iteration', () => {
+      storage.setItem('key1', 'value1');
+      storage.setItem('key2', 'value2');
+      storage.setItem('key3', 'value3');
+
+      expect(Object.entries(storage)).toEqual([
+        ['key1', 'value1'],
+        ['key2', 'value2'],
+        ['key3', 'value3'],
+      ]);
+    });
   }));
