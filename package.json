@@ -27,10 +27,10 @@
     "url": "https://github.com/clarkbw/jest-localstorage-mock/issues"
   },
   "homepage": "https://github.com/clarkbw/jest-localstorage-mock",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "licenses": [
     {
-      "type": "ISC"
+      "type": "BSD-3-Clause"
     }
   ],
   "keywords": [
