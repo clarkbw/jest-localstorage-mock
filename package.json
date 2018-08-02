@@ -48,7 +48,8 @@
     "test": "./__tests__"
   },
   "scripts": {
-    "test": "jest --env=jsdom --no-cache",
+    "test": "jest && yarn test:jsdom",
+    "test:jsdom": "jest --env=jsdom",
     "build": "rollup -c",
     "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" README.md CONTRIBUTING.md *.json rollup.config.js",
     "version": "yarn run build"

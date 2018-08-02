@@ -1,4 +1,8 @@
 import { LocalStorage } from './localstorage';
 
-global.localStorage = new LocalStorage(jest);
-global.sessionStorage = new LocalStorage(jest);
+Object.defineProperty(global, '_localStorage', {
+  value: new LocalStorage(jest),
+});
+Object.defineProperty(global, '_sessionStorage', {
+  value: new LocalStorage(jest),
+});
