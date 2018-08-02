@@ -48,7 +48,7 @@
     "test": "./__tests__"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --env=jsdom --no-cache",
     "build": "rollup -c",
     "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,setups}__}/**/*.js\" README.md CONTRIBUTING.md *.json rollup.config.js",
     "version": "yarn run build"
@@ -56,13 +56,13 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-jest": "^23.0.1",
+    "babel-jest": "^23.4.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.3.1",
-    "jest": "^23.0.1",
+    "jest": "^23.4.2",
     "prettier": "^1.8.2",
     "rollup": "^0.66.0",
     "rollup-plugin-babel": "^4.0.2",
