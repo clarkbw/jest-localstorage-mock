@@ -37,18 +37,22 @@ class LocalStorage {
     });
   } // end constructor
 
+
   get length() {
     return Object.keys(this).length;
-  }
-  // for backwards compatibility
+  } // for backwards compatibility
+
+
   get __STORE__() {
     return this;
   }
+
 }
 
 if (typeof global._localStorage !== 'undefined') {
   Object.defineProperty(global, '_localStorage', {
-    value: new LocalStorage(jest)
+    value: new LocalStorage(jest),
+    writable: false
   });
 } else {
   global.localStorage = new LocalStorage(jest);
@@ -56,7 +60,8 @@ if (typeof global._localStorage !== 'undefined') {
 
 if (typeof global._sessionStorage !== 'undefined') {
   Object.defineProperty(global, '_sessionStorage', {
-    value: new LocalStorage(jest)
+    value: new LocalStorage(jest),
+    writable: false
   });
 } else {
   global.sessionStorage = new LocalStorage(jest);
