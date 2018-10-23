@@ -1,12 +1,9 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": "6.11.3"
-        }
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "6.14.0",
       }
-    ]
-  ]
+    }]
+  ],
 }

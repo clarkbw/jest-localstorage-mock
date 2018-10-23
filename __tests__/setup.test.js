@@ -33,7 +33,7 @@ describe('setup', () => {
 
   ['_localStorage', '_sessionStorage'].forEach(gKey => {
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
-			require('../src/setup');
+      require('../src/setup');
       expect(global[gKey.replace('_', '')].constructor.name).toBe(
         'LocalStorage'
       );
@@ -41,7 +41,7 @@ describe('setup', () => {
 
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
       global[gKey] = true;
-			require('../src/setup');
+      require('../src/setup');
       let e;
       try {
         global[`_${gKey.replace('_', '')}`] = 'blah';
