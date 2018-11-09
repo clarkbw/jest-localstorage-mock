@@ -64,7 +64,7 @@
     "babel-jest": "*",
     "jest": "*",
     "prettier": "^1.8.2",
-    "rollup": "^0.66.6",
+    "rollup": "^0.67.0",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
