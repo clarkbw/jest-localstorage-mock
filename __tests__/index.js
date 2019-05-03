@@ -1,4 +1,4 @@
-describe('storage', () =>
+describe('storage', () => {
   [localStorage, sessionStorage].map(storage => {
     // https://html.spec.whatwg.org/multipage/webstorage.html#storage
     beforeEach(() => {
@@ -13,18 +13,18 @@ describe('storage', () =>
         VALUE = 'bar';
       storage.setItem(KEY, VALUE);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-      expect(storage.__STORE__[KEY]).toBe(VALUE);
-      expect(Object.keys(storage.__STORE__).length).toBe(1);
+      expect(storage[KEY]).toBe(VALUE);
+      expect(Object.keys(storage).length).toBe(1);
       storage.clear();
       expect(storage.clear).toHaveBeenCalledTimes(1);
-      expect(Object.keys(storage.__STORE__).length).toBe(0);
-      expect(storage.__STORE__[KEY]).toBeUndefined();
+      expect(Object.keys(storage).length).toBe(0);
+      expect(storage[KEY]).toBeUndefined();
       storage.setItem(KEY, VALUE);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
       storage.clear();
       expect(storage.clear).toHaveBeenCalledTimes(2);
-      expect(Object.keys(storage.__STORE__).length).toBe(0);
-      expect(storage.__STORE__[KEY]).toBeUndefined();
+      expect(Object.keys(storage).length).toBe(0);
+      expect(storage[KEY]).toBeUndefined();
     });
 
     // setItem
@@ -36,18 +36,18 @@ describe('storage', () =>
         VALUE3 = 42;
       storage.setItem(KEY, VALUE1);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE1);
-      expect(storage.__STORE__[KEY]).toBe(VALUE1);
+      expect(storage[KEY]).toBe(VALUE1);
       storage.setItem(KEY, VALUE2);
       expect(storage.setItem).toHaveBeenLastCalledWith(KEY, VALUE2);
-      expect(storage.__STORE__[KEY]).toBe(VALUE2);
+      expect(storage[KEY]).toBe(VALUE2);
       storage.setItem(KEY, VALUE3);
-      expect(storage.__STORE__[KEY]).toBe(VALUE3.toString());
+      expect(storage[KEY]).toBe(VALUE3.toString());
       storage.setItem(KEY, null);
-      expect(storage.__STORE__[KEY]).toBe('null');
+      expect(storage[KEY]).toBe('null');
       storage.setItem(KEY, undefined);
-      expect(storage.__STORE__[KEY]).toBe('');
+      expect(storage[KEY]).toBe('');
       storage.setItem(KEY, {});
-      expect(storage.__STORE__[KEY]).toBe('[object Object]');
+      expect(storage[KEY]).toBe('[object Object]');
     });
 
     // getItem
@@ -56,7 +56,8 @@ describe('storage', () =>
       const KEY = 'foo',
         VALUE1 = 'bar',
         VALUE2 = 'baz',
-        DOES_NOT_EXIST = 'does not exist';
+        DOES_NOT_EXIST = 'does not exist',
+        LOCAL_STORAGE_RESERVED_KEY = 'key';
 
       storage.setItem(KEY, VALUE1);
       expect(storage.getItem(KEY)).toBe(VALUE1);
@@ -68,6 +69,14 @@ describe('storage', () =>
 
       expect(storage.getItem(DOES_NOT_EXIST)).toBeNull();
       expect(storage.getItem).toHaveBeenLastCalledWith(DOES_NOT_EXIST);
+
+      expect(() =>
+        storage.setItem(LOCAL_STORAGE_RESERVED_KEY, VALUE1)
+      ).not.toThrow();
+      expect(storage.getItem(LOCAL_STORAGE_RESERVED_KEY)).toBe(VALUE1);
+      expect(storage.getItem).toHaveBeenLastCalledWith(
+        LOCAL_STORAGE_RESERVED_KEY
+      );
     });
 
     // removeItem
@@ -132,4 +141,17 @@ describe('storage', () =>
       expect(storage.toString()).toEqual('[object Storage]');
       expect(storage.toString).toHaveBeenCalledTimes(1);
     });
-  }));
+
+    test('iterations', () => {
+      storage.setItem('key1', 'value1');
+      storage.setItem('key2', 'value2');
+      storage.setItem('key3', 'value3');
+
+      expect(Object.entries(storage)).toEqual([
+        ['key1', 'value1'],
+        ['key2', 'value2'],
+        ['key3', 'value3'],
+      ]);
+    });
+  });
+});
