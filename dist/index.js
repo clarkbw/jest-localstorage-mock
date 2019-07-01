@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 class LocalStorage {
   constructor(jest) {
     Object.defineProperty(this, 'getItem', {
@@ -71,5 +69,5 @@ const setup = () => {
   }
 };
 
-exports.setup = setup;
-//# sourceMappingURL=setup.js.map
+setup();
+//# sourceMappingURL=index.js.map

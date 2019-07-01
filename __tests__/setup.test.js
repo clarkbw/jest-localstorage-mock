@@ -1,5 +1,3 @@
-import { LocalStorage } from '../src/localstorage';
-
 describe('setup', () => {
   const orignalImpGlobsl = {};
 
@@ -33,7 +31,7 @@ describe('setup', () => {
 
   ['_localStorage', '_sessionStorage'].forEach(gKey => {
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
-      require('../src/setup');
+      require('../src/index');
       expect(global[gKey.replace('_', '')].constructor.name).toBe(
         'LocalStorage'
       );
@@ -41,7 +39,7 @@ describe('setup', () => {
 
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
       global[gKey] = true;
-      require('../src/setup');
+      require('../src/index');
       let e;
       try {
         global[`_${gKey.replace('_', '')}`] = 'blah';
@@ -50,5 +48,21 @@ describe('setup', () => {
       }
       expect(e).toBeDefined();
     });
+  });
+
+  it('setup should be callable to manually restore mocks', () => {
+    const { setup } = require('../src/setup');
+    const KEY = 'foo';
+    const VALUE = 'bar';
+
+    setup();
+    localStorage.setItem(KEY, VALUE);
+    expect(localStorage.getItem(KEY)).toBe(VALUE);
+    jest.resetAllMocks();
+    localStorage.setItem(KEY, VALUE);
+    expect(localStorage.getItem(KEY)).toBe(undefined);
+    setup();
+    localStorage.setItem(KEY, VALUE);
+    expect(localStorage.getItem(KEY)).toBe(VALUE);
   });
 });

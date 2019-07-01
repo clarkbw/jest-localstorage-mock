@@ -1,1 +1,1 @@
-require('../src/setup');
+require('../src/index');
