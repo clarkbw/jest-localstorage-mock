@@ -63,7 +63,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "*",
     "jest": "*",
-    "prettier": "^1.16.3",
+    "prettier": "^2.0.0",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-node-resolve": "^4.0.0"
