@@ -57,16 +57,16 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-external-helpers": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-external-helpers": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "*",
-    "jest": "*",
-    "prettier": "^1.16.3",
-    "rollup": "^1.1.2",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-node-resolve": "^4.0.0"
+    "babel-jest": "^25.4.0",
+    "jest": "^25.4.0",
+    "prettier": "^2.0.5",
+    "rollup": "^2.7.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "engines": {
     "node": ">=6.16.0"
