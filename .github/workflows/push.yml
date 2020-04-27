@@ -1,0 +1,29 @@
+on: push
+
+name: Build and Publish
+
+jobs:
+  all:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Cache node_modules
+      id: cache-modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
+    - name: Build
+      if: steps.cache-modules.outputs.cache-hit != 'true'
+      run: yarn install
+    - name: Test
+      run: yarn test
+    - name: CodeCov Report
+      uses: codecov/codecov-action@v1
+    - name: Publish
+      if: github.ref == 'refs/heads/master'
+      uses: mikeal/merge-release@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
