@@ -1,5 +1,3 @@
-import { LocalStorage } from '../src/localstorage';
-
 describe('setup', () => {
   const orignalImpGlobals = {};
 
