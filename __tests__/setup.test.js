@@ -1,29 +1,29 @@
 import { LocalStorage } from '../src/localstorage';
 
 describe('setup', () => {
-  const orignalImpGlobsl = {};
+  const orignalImpGlobals = {};
 
-  const setupGloabls = (restore = false) => {
+  const setupGlobals = (restore = false) => {
     [
       '_localStorage',
       'localStorage',
       '_sessionStorage',
       'sessionStorage',
-    ].forEach(globalKey => {
+    ].forEach((globalKey) => {
       if (restore) {
         delete global[globalKey];
-        global[globalKey] = orignalImpGlobsl[globalKey];
+        global[globalKey] = orignalImpGlobals[globalKey];
       } else {
-        orignalImpGlobsl[globalKey] = global[globalKey];
+        orignalImpGlobals[globalKey] = global[globalKey];
         delete global[globalKey];
       }
     });
   };
 
-  const restoreGlobals = () => setupGloabls(true);
+  const restoreGlobals = () => setupGlobals(true);
 
   beforeEach(() => {
-    setupGloabls();
+    setupGlobals();
     jest.resetModuleRegistry();
   });
 
@@ -31,7 +31,7 @@ describe('setup', () => {
     restoreGlobals();
   });
 
-  ['_localStorage', '_sessionStorage'].forEach(gKey => {
+  ['_localStorage', '_sessionStorage'].forEach((gKey) => {
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
       require('../src/setup');
       expect(global[gKey.replace('_', '')].constructor.name).toBe(
