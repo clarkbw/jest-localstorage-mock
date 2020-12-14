@@ -2,7 +2,7 @@ export class LocalStorage {
   constructor(jest) {
     Object.defineProperty(this, 'getItem', {
       enumerable: false,
-      value: jest.fn(key => this[key] || null),
+      value: jest.fn(key => this[key] !== undefined ? this[key] : null),
     });
     Object.defineProperty(this, 'setItem', {
       enumerable: false,
