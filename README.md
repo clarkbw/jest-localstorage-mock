@@ -101,9 +101,7 @@ By including this in your Jest setup you'll allow tests that expect a
 also allow you to use the mocks provided to check that your localStorage is
 being used as expected.
 
-The `__STORE__` attribute of `localStorage.__STORE__` or
-`sessionStorage.__STORE__` is made available for you to directly access the
-storage object if needed.
+You can directly access the storage object with `localStorage` or `sessionStorage` if needed.
 
 ### Test Examples
 
@@ -115,8 +113,8 @@ test('should save to localStorage', () => {
     VALUE = 'bar';
   dispatch(action.update(KEY, VALUE));
   expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(1);
+  expect(localStorage[KEY]).toBe(VALUE);
+  expect(localStorage.length).toBe(1);
 });
 ```
 
@@ -127,7 +125,7 @@ Check that your `sessionStorage` is empty, examples work with either
 test('should have cleared the sessionStorage', () => {
   dispatch(action.reset());
   expect(sessionStorage.clear).toHaveBeenCalledTimes(1);
-  expect(sessionStorage.__STORE__).toEqual({}); // check store values
+  expect(sessionStorage).toEqual({}); // check store values
   expect(sessionStorage.length).toBe(0); // or check length
 });
 ```
@@ -140,7 +138,7 @@ test('should not have saved to localStorage', () => {
     VALUE = 'bar';
   dispatch(action.notIdempotent(KEY, VALUE));
   expect(localStorage.setItem).not.toHaveBeenLastCalledWith(KEY, VALUE);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(0);
+  expect(localStorage.length).toBe(0);
 });
 ```
 
@@ -151,7 +149,7 @@ beforeEach(() => {
   // values stored in tests will also be available in other tests unless you run
   localStorage.clear();
   // or directly reset the storage
-  localStorage.__STORE__ = {};
+  localStorage = {};
   // you could also reset all mocks, but this could impact your other mocks
   jest.resetAllMocks();
   // or individually reset a mock used
@@ -163,8 +161,8 @@ test('should not impact the next test', () => {
     VALUE = 'bar';
   dispatch(action.update(KEY, VALUE));
   expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(1);
+  expect(localStorage[KEY]).toBe(VALUE);
+  expect(localStorage.length).toBe(1);
 });
 
 test('should not be impacted by the previous test', () => {
@@ -172,8 +170,8 @@ test('should not be impacted by the previous test', () => {
     VALUE = 'zab';
   dispatch(action.update(KEY, VALUE));
   expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
-  expect(localStorage.__STORE__[KEY]).toBe(VALUE);
-  expect(Object.keys(localStorage.__STORE__).length).toBe(1);
+  expect(localStorage[KEY]).toBe(VALUE);
+  expect(localStorage.length).toBe(1);
 });
 ```
 

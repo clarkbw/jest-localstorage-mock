@@ -1,45 +1,53 @@
-export class LocalStorage {
-  constructor(jest) {
-    Object.defineProperty(this, 'getItem', {
-      enumerable: false,
-      value: jest.fn(key => this[key] || null),
-    });
-    Object.defineProperty(this, 'setItem', {
-      enumerable: false,
-      // not mentioned in the spec, but we must always coerce to a string
-      value: jest.fn((key, val = '') => {
-        this[key] = val + '';
-      }),
-    });
-    Object.defineProperty(this, 'removeItem', {
-      enumerable: false,
-      value: jest.fn(key => {
-        delete this[key];
-      }),
-    });
-    Object.defineProperty(this, 'clear', {
-      enumerable: false,
-      value: jest.fn(() => {
-        Object.keys(this).map(key => delete this[key]);
-      }),
-    });
-    Object.defineProperty(this, 'toString', {
-      enumerable: false,
-      value: jest.fn(() => {
-        return '[object Storage]';
-      }),
-    });
-    Object.defineProperty(this, 'key', {
-      enumerable: false,
-      value: jest.fn(idx => Object.keys(this)[idx] || null),
-    });
-  } // end constructor
+export const createStorage = jest => {
+  const storage = Object.create(null);
 
-  get length() {
-    return Object.keys(this).length;
-  }
-  // for backwards compatibility
-  get __STORE__() {
-    return this;
-  }
-}
+  const methods = {
+    getItem: jest.fn(key => {
+      if (key in storage) {
+        return storage[key];
+      }
+
+      return null;
+    }),
+
+    setItem: jest.fn((key, value = '') => {
+      storage[key] = value + '';
+    }),
+
+    removeItem: jest.fn(key => {
+      delete storage[key];
+    }),
+
+    clear: jest.fn(() => {
+      Object.keys(storage).forEach(key => delete storage[key]);
+    }),
+
+    toString: jest.fn(() => '[object Storage]'),
+
+    key: jest.fn(idx => Object.keys(storage)[idx] || null),
+
+    get length() {
+      return Object.keys(storage).length;
+    },
+
+    get constructor() {
+      return {
+        name: 'LocalStorage',
+      };
+    },
+
+    get __STORE__() {
+      return { ...storage };
+    },
+  };
+
+  return new Proxy(storage, {
+    get(_, prop) {
+      if (prop in methods) {
+        return methods[prop];
+      }
+
+      return Reflect.get(...arguments);
+    },
+  });
+};

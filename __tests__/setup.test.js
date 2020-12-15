@@ -1,9 +1,7 @@
-import { LocalStorage } from '../src/localstorage';
-
 describe('setup', () => {
   const orignalImpGlobsl = {};
 
-  const setupGloabls = (restore = false) => {
+  const setupGlobals = (restore = false) => {
     [
       '_localStorage',
       'localStorage',
@@ -20,10 +18,10 @@ describe('setup', () => {
     });
   };
 
-  const restoreGlobals = () => setupGloabls(true);
+  const restoreGlobals = () => setupGlobals(true);
 
   beforeEach(() => {
-    setupGloabls();
+    setupGlobals();
     jest.resetModuleRegistry();
   });
 
@@ -31,20 +29,20 @@ describe('setup', () => {
     restoreGlobals();
   });
 
-  ['_localStorage', '_sessionStorage'].forEach(gKey => {
-    it(`[${gKey}] should define a property on the global object with writable false`, () => {
+  ['_localStorage', '_sessionStorage'].forEach(globalKey => {
+    it(`[${globalKey}] should define a property on the global object with writable false`, () => {
       require('../src/setup');
-      expect(global[gKey.replace('_', '')].constructor.name).toBe(
+      expect(global[globalKey.replace('_', '')].constructor.name).toBe(
         'LocalStorage'
       );
     });
 
-    it(`[${gKey}] should define a property on the global object with writable false`, () => {
-      global[gKey] = true;
+    it(`[${globalKey}] should define a property on the global object with writable false`, () => {
+      global[globalKey] = true;
       require('../src/setup');
       let e;
       try {
-        global[`_${gKey.replace('_', '')}`] = 'blah';
+        global[`_${globalKey.replace('_', '')}`] = 'blah';
       } catch (_e) {
         e = _e;
       }
