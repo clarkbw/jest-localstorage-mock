@@ -2,7 +2,7 @@ export class LocalStorage {
   constructor(jest) {
     Object.defineProperty(this, 'getItem', {
       enumerable: false,
-      value: jest.fn(key => this[key] || null),
+      value: jest.fn((key) => this[key] || null),
     });
     Object.defineProperty(this, 'setItem', {
       enumerable: false,
@@ -13,14 +13,14 @@ export class LocalStorage {
     });
     Object.defineProperty(this, 'removeItem', {
       enumerable: false,
-      value: jest.fn(key => {
+      value: jest.fn((key) => {
         delete this[key];
       }),
     });
     Object.defineProperty(this, 'clear', {
       enumerable: false,
       value: jest.fn(() => {
-        Object.keys(this).map(key => delete this[key]);
+        Object.keys(this).map((key) => delete this[key]);
       }),
     });
     Object.defineProperty(this, 'toString', {
@@ -31,7 +31,7 @@ export class LocalStorage {
     });
     Object.defineProperty(this, 'key', {
       enumerable: false,
-      value: jest.fn(idx => Object.keys(this)[idx] || null),
+      value: jest.fn((idx) => Object.keys(this)[idx] || null),
     });
   } // end constructor
 

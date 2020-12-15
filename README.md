@@ -177,5 +177,50 @@ test('should not be impacted by the previous test', () => {
 });
 ```
 
+If needing to change the mock implementation of `localStorage` methods, please use jest's
+[mockImplementationOnce](https://jestjs.io/docs/en/mock-function-api#mockfnmockimplementationoncefn).
+Using other methods may result in the current method mock being permanently overwritten.
+
+```js
+// does NOT work
+test('should override the setItem mock and reset it to its previous implementation', () => {
+  const KEY = 'foo',
+    VALUE = 'bar';
+
+  localStorage.setItem.mockImplementation(() => {
+    throw 'Something went wrong!'
+  })
+  expect(() => {
+    localStorage.setItem(KEY, VALUE)
+  }).toThrow('Something went wrong!')
+
+  localStorage.setItem.mockClear();
+  expect(() => {
+    localStorage.setItem(KEY, VALUE)
+  }).not.toThrow('Something went wrong!')
+});
+
+// does work
+test('should override the setItem mock and reset it to its previous implementation', () => {
+  const KEY = 'foo',
+    VALUE = 'bar';
+  
+  localStorage.setItem.mockImplementationOnce(() => {
+    throw 'Something went wrong!'
+  })
+  expect(() => {
+    localStorage.setItem(KEY, VALUE)
+  }).toThrow('Something went wrong!')
+  
+  localStorage.setItem.mockClear();
+  expect(() => {
+    localStorage.setItem(KEY, VALUE)
+  }).not.toThrow('Something went wrong!')
+
+  expect(localStorage.getItem(KEY)).toEqual(VALUE)
+});
+
+```
+
 See the [contributing guide](./CONTRIBUTING.md) for details on how you can
 contribute.
