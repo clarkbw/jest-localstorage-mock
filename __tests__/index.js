@@ -1,5 +1,5 @@
 describe('storage', () =>
-  [localStorage, sessionStorage].map(storage => {
+  [localStorage, sessionStorage].map((storage) => {
     // https://html.spec.whatwg.org/multipage/webstorage.html#storage
     beforeEach(() => {
       storage.clear();
