@@ -11,6 +11,10 @@ module dependencies by using this.
 [![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/jest-localstorage-mock.svg)](https://greenkeeper.io/)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/clarkbw/jest-localstorage-mock.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
+# Jest 24+
+
+Note that with `jest@24` and above this project potentially duplicating functionality.
+
 ## Install
 
 This should only be installed as a development dependency (`devDependencies`) as

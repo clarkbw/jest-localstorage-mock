@@ -1,20 +1,20 @@
-import { LocalStorage } from "../src/localstorage";
+import { LocalStorage } from '../src/localstorage';
 
-describe("localstorage", () => {
+describe('localstorage', () => {
   let localStorage;
 
   beforeEach(() => {
     localStorage = new LocalStorage(jest);
   });
 
-  describe("getItem", () => {
-    it("should return null if the item is undefined", () => {
-      expect(localStorage.getItem("item")).toBeNull();
+  describe('getItem', () => {
+    it('should return null if the item is undefined', () => {
+      expect(localStorage.getItem('item')).toBeNull();
     });
 
     it("should return '' instead of null", () => {
-      localStorage.setItem("item", "");
-      expect(localStorage.getItem("item")).toBe("");
+      localStorage.setItem('item', '');
+      expect(localStorage.getItem('item')).toBe('');
     });
   });
 });

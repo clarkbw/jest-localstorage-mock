@@ -9,7 +9,7 @@ describe('setup', () => {
       'localStorage',
       '_sessionStorage',
       'sessionStorage',
-    ].forEach(globalKey => {
+    ].forEach((globalKey) => {
       if (restore) {
         delete global[globalKey];
         global[globalKey] = orignalImpGlobsl[globalKey];
@@ -31,7 +31,7 @@ describe('setup', () => {
     restoreGlobals();
   });
 
-  ['_localStorage', '_sessionStorage'].forEach(gKey => {
+  ['_localStorage', '_sessionStorage'].forEach((gKey) => {
     it(`[${gKey}] should define a property on the global object with writable false`, () => {
       require('../src/setup');
       expect(global[gKey.replace('_', '')].constructor.name).toBe(
