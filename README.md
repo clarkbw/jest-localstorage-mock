@@ -43,11 +43,12 @@ to create a [setup file](#setup-file) if needed.
 
 In your `package.json` under the `jest`
 [configuration section](https://facebook.github.io/jest/docs/en/configuration.html#content)
-create a `setupFiles` array and add `jest-localstorage-mock` to the array.
+create a `setupFiles` array and add `jest-localstorage-mock` to the array. Also, ensure you have *not* enabled [`resetMocks`](https://jestjs.io/docs/en/configuration#resetmocks-boolean).
 
 ```json
 {
   "jest": {
+    "resetMocks": false,
     "setupFiles": ["jest-localstorage-mock"]
   }
 }
@@ -59,6 +60,7 @@ If you already have a `setupFiles` attribute you can also append
 ```json
 {
   "jest": {
+    "resetMocks": false,
     "setupFiles": ["./__setups__/other.js", "jest-localstorage-mock"]
   }
 }
@@ -97,6 +99,18 @@ with this at the beginning of the existing `src/setupTests.js` file:
 ```js
 require('jest-localstorage-mock');
 ```
+
+You must also override some of create-react-app's default jest configuration. You can do so in your `package.json`:
+
+```json
+{
+  "jest": {
+    "resetMocks": false
+  }
+}
+```
+
+For more information, see [#125](https://github.com/clarkbw/jest-localstorage-mock/issues/125).
 
 ## In tests
 
