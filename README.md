@@ -173,8 +173,6 @@ beforeEach(() => {
   
   // clearAllMocks will impact your other mocks too, so you can optionally reset individual mocks instead:
   localStorage.setItem.mockClear();
-  // you can also directly reset the storage (same as .clear above)
-  localStorage.__STORE__ = {};
 });
 
 test('should not impact the next test', () => {
