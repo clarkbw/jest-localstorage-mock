@@ -45,7 +45,7 @@ describe('storage', () =>
       storage.setItem(KEY, null);
       expect(storage.__STORE__[KEY]).toBe('null');
       storage.setItem(KEY, undefined);
-      expect(storage.__STORE__[KEY]).toBe('');
+      expect(storage.__STORE__[KEY]).toBe('undefined');
       storage.setItem(KEY, {});
       expect(storage.__STORE__[KEY]).toBe('[object Object]');
     });
