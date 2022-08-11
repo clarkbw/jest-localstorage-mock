@@ -7,7 +7,7 @@ export class LocalStorage {
     Object.defineProperty(this, 'setItem', {
       enumerable: false,
       // not mentioned in the spec, but we must always coerce to a string
-      value: jest.fn((key, val = '') => {
+      value: jest.fn((key, val) => {
         this[key] = val + '';
       }),
     });
